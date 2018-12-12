@@ -29,4 +29,6 @@ public:
 
 	float distance(Vector2 other);
 
+	float dotProduct(Vector2 rhs);
+
 };

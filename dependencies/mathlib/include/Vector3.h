@@ -31,4 +31,8 @@ public:
 
 	float distance(Vector3 other);
 
+	float dotProduct(Vector3 rhs);
+
+	Vector3 crossProduct(Vector3 rhs);
+
 };

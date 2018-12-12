@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Vector2.h>
+#include <Vector3.h>
 #include "Application.h"
 #include "Renderer2D.h"
 
@@ -19,10 +20,20 @@ public:
 protected:
 
 	aie::Renderer2D*	m_2dRenderer;
-	aie::Texture*		m_texture;
-	aie::Texture*		m_shipTexture;
 	aie::Font*			m_font;
 
-	float m_cameraX, m_cameraY;
+	aie::Texture*		m_Coat;
+
+	Vector2 m_CoatGuy;
+
+	Vector2 North;
+	Vector2 South;
+	Vector2 East;
+	Vector2 West;
+
 	float m_timer;
+
+	float m_CoatX, m_CoatY;
+
+	int op;
 };
