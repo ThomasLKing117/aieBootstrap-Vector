@@ -15,18 +15,20 @@ bool Application2D::startup() {
 	
 	m_2dRenderer = new aie::Renderer2D();
 
-	m_Coat = new aie::Texture("./textures/GreenCoat.png");
+	m_CoatT = new aie::Texture("./textures/GreenCoat.png");
 
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 	
 	m_timer = 0;
 
-	m_CoatGuy = { 1280 - 640, 720 - 360 };
+	m_CoatGuy = { 30, 40};
 
 	North = { 0, 5 };
 	South = { 0, -5 };
 	East = { 5, 0 };
 	West = { -5, 0 };
+
+	temp = 200;
 
 	op;
 
@@ -48,17 +50,16 @@ void Application2D::update(float deltaTime) {
 
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
-		m_CoatGuy = m_CoatGuy + North;
-		m_2dRenderer->setUVRect(int(m_timer * 10) % 4 / 4.0f, .75, 1.f / 4, 1.f / 4);
-		op = 0;
+		m_CoatGuy = m_CoatGuy + North * deltaTime * temp;
+		
 	}
 
-	if (input->isKeyDown(aie::INPUT_KEY_S))
+	/*if (input->isKeyDown(aie::INPUT_KEY_S))
 	{
 		m_CoatGuy = m_CoatGuy + South;
 		m_2dRenderer->setUVRect(int(m_timer * 10) % 4 / 4.0f, 0, 1.f / 4, 1.f / 4);
 		op = 1;
-	}
+	}*/
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
@@ -74,22 +75,41 @@ void Application2D::update(float deltaTime) {
 		op = 3;
 	}
 
+	if (m_CoatGuy.getY() < getWindowHeight() - 680)
+	{
+		m_CoatGuy = m_CoatGuy + North;
+	}
+
+	if (m_CoatGuy.getY() > getWindowHeight() - 675)
+	{
+		m_CoatGuy = m_CoatGuy + South;
+	}
+
+	if (m_CoatGuy.getX() > getWindowWidth() - 30)
+	{
+		m_CoatGuy = m_CoatGuy + West;
+	}
+
+	if (m_CoatGuy.getX() < getWindowWidth() - 1250)
+	{
+		m_CoatGuy = m_CoatGuy + East;
+	}
+
 	switch (op)
 	{
-	case 0:
+	/*case 0:
 		if (input->isKeyUp(aie::INPUT_KEY_W))
 		{
 			m_2dRenderer->setUVRect(0 / 4.0f, .75, 1.f / 4, 1.f / 4);
 		}
 		break;
-
-	default:
-	case 1:
+*/
+	/*case 1:
 		if (input->isKeyUp(aie::INPUT_KEY_S))
 		{
 			m_2dRenderer->setUVRect(0 / 4.0f, 0, 1.f / 4, 1.f / 4);
 		}
-		break;
+		break;*/
 
 	case 2:
 		if (input->isKeyUp(aie::INPUT_KEY_A))
@@ -97,6 +117,8 @@ void Application2D::update(float deltaTime) {
 			m_2dRenderer->setUVRect(0 / 4.0f, .25, 1.f / 4, 1.f / 4);
 		}
 		break;
+
+	default:
 	case 3:
 		if (input->isKeyUp(aie::INPUT_KEY_D))
 		{
@@ -121,7 +143,7 @@ void Application2D::draw() {
 	// begin drawing sprites
 	m_2dRenderer->begin();
 
-	m_2dRenderer->drawSprite(m_Coat, m_CoatGuy.getX(), m_CoatGuy.getY(), 50, 80, 0, 0);
+	m_2dRenderer->drawSprite(m_CoatT, m_CoatGuy.getX(), m_CoatGuy.getY(), 50, 80, 0, 0);
 	
 	// output some text, uses the last used colour
 	char fps[32];

@@ -22,7 +22,7 @@ protected:
 	aie::Renderer2D*	m_2dRenderer;
 	aie::Font*			m_font;
 
-	aie::Texture*		m_Coat;
+	aie::Texture*		m_CoatT;
 
 	Vector2 m_CoatGuy;
 
@@ -34,6 +34,8 @@ protected:
 	float m_timer;
 
 	float m_CoatX, m_CoatY;
+
+	float temp;
 
 	int op;
 };
