@@ -67,22 +67,22 @@ void Application2D::update(float deltaTime) {
 
 	if (m_CoatGuy.getY() < getWindowHeight() - 680)
 	{
-		m_CoatGuy = m_CoatGuy + North;
+		m_CoatGuy += North;
 	}
 
 	if (m_CoatGuy.getY() > getWindowHeight() - 40)
 	{
-		m_CoatGuy = m_CoatGuy + South;
+		m_CoatGuy += South;
 	}
 
 	if (m_CoatGuy.getX() > getWindowWidth() - 30)
 	{
-		m_CoatGuy = m_CoatGuy + West;
+		m_CoatGuy += West;
 	}
 
 	if (m_CoatGuy.getX() < getWindowWidth() - 1250)
 	{
-		m_CoatGuy = m_CoatGuy + East;
+		m_CoatGuy += East;
 	}
 
 	switch (op)
