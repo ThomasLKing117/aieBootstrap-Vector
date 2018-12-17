@@ -25,6 +25,9 @@ public:
 	bool operator == (Vector3& rhs);
 	bool operator != (Vector3& rhs);
 
+	Vector3 operator += (Vector3& other);
+	Vector3 operator -= (Vector3& other);
+
 	float magnitude();
 
 	Vector3 normalize();

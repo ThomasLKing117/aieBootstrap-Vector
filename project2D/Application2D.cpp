@@ -53,14 +53,14 @@ void Application2D::update(float deltaTime) {
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
-		m_CoatGuy = m_CoatGuy + West;
+		m_CoatGuy += West;
 		m_2dRenderer->setUVRect(int(m_timer * 10) % 4 / 4.0f, .25, 1.f / 4, 1.f / 4);
 		op = 2;
 	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
-		m_CoatGuy = m_CoatGuy + East;
+		m_CoatGuy += East;
 		m_2dRenderer->setUVRect(int(m_timer * 10) % 4 / 4.0f, .50, 1.f / 4, 1.f / 4);
 		op = 3;
 	}
