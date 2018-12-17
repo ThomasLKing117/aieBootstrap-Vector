@@ -28,8 +28,6 @@ bool Application2D::startup() {
 	East = { 5, 0 };
 	West = { -5, 0 };
 
-	temp = 200;
-
 	op;
 
 	return true;
@@ -39,6 +37,7 @@ void Application2D::shutdown() {
 	
 	delete m_font;
 	delete m_2dRenderer;
+	delete m_CoatT;
 }
 
 void Application2D::update(float deltaTime) {
@@ -50,16 +49,9 @@ void Application2D::update(float deltaTime) {
 
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
-		m_CoatGuy = m_CoatGuy + North * deltaTime * temp;
+		m_CoatGuy = m_CoatGuy + North;
 		
 	}
-
-	/*if (input->isKeyDown(aie::INPUT_KEY_S))
-	{
-		m_CoatGuy = m_CoatGuy + South;
-		m_2dRenderer->setUVRect(int(m_timer * 10) % 4 / 4.0f, 0, 1.f / 4, 1.f / 4);
-		op = 1;
-	}*/
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
@@ -80,7 +72,7 @@ void Application2D::update(float deltaTime) {
 		m_CoatGuy = m_CoatGuy + North;
 	}
 
-	if (m_CoatGuy.getY() > getWindowHeight() - 675)
+	if (m_CoatGuy.getY() > getWindowHeight() - 40)
 	{
 		m_CoatGuy = m_CoatGuy + South;
 	}
@@ -97,20 +89,6 @@ void Application2D::update(float deltaTime) {
 
 	switch (op)
 	{
-	/*case 0:
-		if (input->isKeyUp(aie::INPUT_KEY_W))
-		{
-			m_2dRenderer->setUVRect(0 / 4.0f, .75, 1.f / 4, 1.f / 4);
-		}
-		break;
-*/
-	/*case 1:
-		if (input->isKeyUp(aie::INPUT_KEY_S))
-		{
-			m_2dRenderer->setUVRect(0 / 4.0f, 0, 1.f / 4, 1.f / 4);
-		}
-		break;*/
-
 	case 2:
 		if (input->isKeyUp(aie::INPUT_KEY_A))
 		{
@@ -144,12 +122,6 @@ void Application2D::draw() {
 	m_2dRenderer->begin();
 
 	m_2dRenderer->drawSprite(m_CoatT, m_CoatGuy.getX(), m_CoatGuy.getY(), 50, 80, 0, 0);
-	
-	// output some text, uses the last used colour
-	char fps[32];
-	sprintf_s(fps, 32, "FPS: %i", getFPS());
-	m_2dRenderer->drawText(m_font, fps, 0, 720 - 32);
-	m_2dRenderer->drawText(m_font, "Press ESC to quit!", 0, 720 - 64);
 
 	// done drawing sprites
 	m_2dRenderer->end();
