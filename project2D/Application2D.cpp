@@ -30,8 +30,6 @@ bool Application2D::startup() {
 
 	op;
 
-	temp = 0;
-
 	return true;
 }
 
@@ -46,10 +44,13 @@ void Application2D::update(float deltaTime) {
 
 	m_timer += deltaTime;
 
-	temp += deltaTime;
-
 	// input example
 	aie::Input* input = aie::Input::getInstance();
+
+	if (input->isKeyDown(aie::INPUT_KEY_W))
+	{
+		m_CoatGuy = North += South;
+	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{

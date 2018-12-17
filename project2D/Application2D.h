@@ -35,7 +35,5 @@ protected:
 
 	float m_CoatX, m_CoatY;
 
-	float temp;
-
 	int op;
 };
