@@ -21,14 +21,21 @@ bool Application2D::startup() {
 	
 	m_timer = 0;
 
-	m_CoatGuy = { 30, 40};
+	m_CoatGuyY = 40;
+	m_CoatGuyX = 30;
 
-	North = { 0,  5 };
-	South = { 0, -5 };
-	East = { 5, 0 };
-	West = { -5, 0 };
+	m_CoatGuy = { m_CoatGuyX , m_CoatGuyY };
+
+	North = 5;
+	South = -5;
+	East = 5;
+	West = -5;
 
 	op;
+	
+	jumpForce = 5;
+
+	gravity = 2.5;
 
 	return true;
 }
@@ -44,41 +51,56 @@ void Application2D::update(float deltaTime) {
 
 	m_timer += deltaTime;
 
+	m_CoatGuy = { m_CoatGuyX , m_CoatGuyY };
+	
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
+	if (input->isKeyDown(aie::INPUT_KEY_W))
+	{
+		m_CoatGuyY += jumpForce;
+	}
+
+	if (input->isKeyUp(aie::INPUT_KEY_W))
+	{
+		if (m_CoatGuy.getY() > getWindowHeight() - 680)
+		{
+			m_CoatGuyY -= gravity;
+		}
+	}
+
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
-		m_CoatGuy += West;
+		m_CoatGuyX += West;
 		m_2dRenderer->setUVRect(int(m_timer * 10) % 4 / 4.0f, .25, 1.f / 4, 1.f / 4);
 		op = 2;
 	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
-		m_CoatGuy += East;
+		m_CoatGuyX += East;
 		m_2dRenderer->setUVRect(int(m_timer * 10) % 4 / 4.0f, .50, 1.f / 4, 1.f / 4);
 		op = 3;
 	}
 
 	if (m_CoatGuy.getY() < getWindowHeight() - 680)
 	{
-		m_CoatGuy += North;
+		m_CoatGuyY += North;
 	}
 
 	if (m_CoatGuy.getY() > getWindowHeight() - 40)
 	{
-		m_CoatGuy += South;
+		m_CoatGuyY += South;
 	}
 
 	if (m_CoatGuy.getX() > getWindowWidth() - 30)
 	{
-		m_CoatGuy += West;
+		m_CoatGuyX += West;
 	}
 
 	if (m_CoatGuy.getX() < getWindowWidth() - 1250)
 	{
-		m_CoatGuy += East;
+		m_CoatGuyX += East;
 	}
 
 	switch (op)

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Vector2.h>
-#include <Vector3.h>
 #include "Application.h"
 #include "Renderer2D.h"
 
@@ -26,14 +25,18 @@ protected:
 
 	Vector2 m_CoatGuy;
 
-	Vector2 North;
-	Vector2 South;
-	Vector2 East;
-	Vector2 West;
+	float m_CoatGuyX, m_CoatGuyY;
+
+	float North;
+	float South;
+	float East;
+	float West;
 
 	float m_timer;
 
-	float m_CoatX, m_CoatY;
-
 	int op;
+
+	float jumpForce;
+
+	float gravity;
 };
