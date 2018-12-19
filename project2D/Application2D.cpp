@@ -35,7 +35,7 @@ bool Application2D::startup() {
 	
 	jumpForce = 5;
 
-	gravity = 2.5;
+	gravity = 5;
 
 	return true;
 }
@@ -59,6 +59,10 @@ void Application2D::update(float deltaTime) {
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
 		m_CoatGuyY += jumpForce;
+		if (m_CoatGuyY >= 100)
+		{
+			m_CoatGuyY += South;
+		}
 	}
 
 	if (input->isKeyUp(aie::INPUT_KEY_W))
